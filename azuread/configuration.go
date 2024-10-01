@@ -34,6 +34,7 @@ const (
 	ActiveDirectoryServicePrincipalAccessToken = "ActiveDirectoryServicePrincipalAccessToken"
 	ActiveDirectoryDeviceCode                  = "ActiveDirectoryDeviceCode"
 	ActiveDirectoryAzCli                       = "ActiveDirectoryAzCli"
+	ActiveDirectoryWorkloadIdentity            = "ActiveDirectoryWorkloadIdentity"
 	scopeDefaultSuffix                         = "/.default"
 )
 
@@ -105,6 +106,9 @@ func (p *azureFedAuthConfig) validateParameters(params map[string]string) error 
 		p.adalWorkflow = mssql.FedAuthADALWorkflowMSI
 		p.resourceID = params["resource id"]
 		p.clientID, _ = splitTenantAndClientID(params["user id"])
+	case strings.EqualFold(fedAuthWorkflow, ActiveDirectoryWorkloadIdentity):
+		p.adalWorkflow = mssql.FedAuthADALWorkflowPassword
+		p.clientID, p.tenantID = splitTenantAndClientID(params["user id"])
 	case strings.EqualFold(fedAuthWorkflow, ActiveDirectoryApplication) || strings.EqualFold(fedAuthWorkflow, ActiveDirectoryServicePrincipal):
 		p.adalWorkflow = mssql.FedAuthADALWorkflowPassword
 		// Split the clientID@tenantID format
@@ -207,6 +211,11 @@ func (p *azureFedAuthConfig) provideActiveDirectoryToken(ctx context.Context, se
 		} else {
 			cred, err = azidentity.NewManagedIdentityCredential(nil)
 		}
+	case ActiveDirectoryWorkloadIdentity:
+		cred, err = azidentity.NewWorkloadIdentityCredential(&azidentity.WorkloadIdentityCredentialOptions{
+			ClientID: p.clientID,
+			TenantID: p.tenantID,
+		})
 	case ActiveDirectoryInteractive:
 		c := cloud.Configuration{ActiveDirectoryAuthorityHost: authority}
 		config := azcore.ClientOptions{Cloud: c}
