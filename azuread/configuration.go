@@ -107,7 +107,7 @@ func (p *azureFedAuthConfig) validateParameters(params map[string]string) error 
 		p.resourceID = params["resource id"]
 		p.clientID, _ = splitTenantAndClientID(params["user id"])
 	case strings.EqualFold(fedAuthWorkflow, ActiveDirectoryWorkloadIdentity):
-		p.adalWorkflow = mssql.FedAuthADALWorkflowPassword
+		p.adalWorkflow = mssql.FedAuthLibrarySecurityToken
 		p.clientID, p.tenantID = splitTenantAndClientID(params["user id"])
 	case strings.EqualFold(fedAuthWorkflow, ActiveDirectoryApplication) || strings.EqualFold(fedAuthWorkflow, ActiveDirectoryServicePrincipal):
 		p.adalWorkflow = mssql.FedAuthADALWorkflowPassword
