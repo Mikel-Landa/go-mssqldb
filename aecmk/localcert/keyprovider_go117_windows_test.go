@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/microsoft/go-mssqldb/aecmk"
-	"github.com/microsoft/go-mssqldb/internal/certs"
+	"github.com/mikel-landa/go-mssqldb/aecmk"
+	"github.com/mikel-landa/go-mssqldb/internal/certs"
 	"github.com/stretchr/testify/assert"
 )
 

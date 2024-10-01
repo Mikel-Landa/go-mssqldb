@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/microsoft/go-mssqldb/aecmk"
-	"github.com/microsoft/go-mssqldb/internal/akvkeys"
+	"github.com/mikel-landa/go-mssqldb/aecmk"
+	"github.com/mikel-landa/go-mssqldb/internal/akvkeys"
 	"github.com/stretchr/testify/assert"
 )
 

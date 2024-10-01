@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/microsoft/go-mssqldb/internal/cp"
-	"github.com/microsoft/go-mssqldb/internal/decimal"
+	"github.com/mikel-landa/go-mssqldb/internal/cp"
+	"github.com/mikel-landa/go-mssqldb/internal/decimal"
 )
 
 // fixed-length data types

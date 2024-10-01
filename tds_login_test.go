@@ -11,7 +11,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/microsoft/go-mssqldb/msdsn"
+	"github.com/mikel-landa/go-mssqldb/msdsn"
 )
 
 type MockTransportDialer struct {

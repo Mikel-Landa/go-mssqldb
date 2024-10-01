@@ -7,8 +7,8 @@ import (
 	"reflect"
 	"testing"
 
-	mssql "github.com/microsoft/go-mssqldb"
-	"github.com/microsoft/go-mssqldb/msdsn"
+	mssql "github.com/mikel-landa/go-mssqldb"
+	"github.com/mikel-landa/go-mssqldb/msdsn"
 )
 
 func TestValidateParameters(t *testing.T) {
